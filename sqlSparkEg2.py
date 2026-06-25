@@ -1,0 +1,19 @@
+from pyspark.sql import SparkSession
+
+spark = SparkSession.builder.appName('SparkSQL').getOrCreate()
+
+people = spark.read.option("header","true").option("inferSchema","true").csv("fakefriends-header.csv")
+
+print("Here is our inferred schema:")
+people.printSchema()
+
+# print("Column name:")
+# people.select('name').show()
+
+# print('Filter out anyone over 21:')
+# people.filter(people.age < 21).show()
+
+print('Group by age')
+people.groupBy('age').count().orderBy('age').show()
+
+spark.stop()
