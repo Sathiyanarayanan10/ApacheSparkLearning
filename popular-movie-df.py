@@ -13,7 +13,7 @@ schema = StructType([
     StructField("timestamp",LongType(),True)
 ])
 
-# load data
+# load data \t as the separator is tab in the csv
 moviesDF = spark.read.option("sep","\t").schema(schema).csv("ml-100k/u.data")
 
 # SQL style sort all movie by popularity
